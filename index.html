@@ -168,7 +168,8 @@ textarea.inp{height:auto;min-height:34px;padding:7px 9px;resize:vertical}
 .grand b{font-family:var(--mono);font-size:26px;font-weight:600;color:var(--text);letter-spacing:-.02em}
 .range-note{font-size:11.5px;color:var(--muted);text-align:right;margin-top:2px}
 .range-note b{font-family:var(--mono);color:var(--text2);font-weight:500}
-.acts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:12px}
+.acts{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:12px}
+.acts .btn{padding:0 6px;gap:5px}
 .acts .btn{justify-content:center}
 
 .toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);background:var(--text);color:var(--bg);padding:9px 14px;border-radius:8px;font-size:13px;font-weight:500;opacity:0;pointer-events:none;transition:all .2s;z-index:80;max-width:90vw}
@@ -179,19 +180,68 @@ textarea.inp{height:auto;min-height:34px;padding:7px 9px;resize:vertical}
 ::-webkit-scrollbar-track{background:transparent}
 
 @media (max-width:1360px){.app{grid-template-columns:228px minmax(0,1fr) 400px}}
-@media (max-width:1060px){
-  .app{grid-template-columns:1fr;height:auto}
+.more{display:flex;justify-content:center;gap:8px;padding:14px 0 6px}
+.more span{font-size:12px;color:var(--muted);align-self:center}
+.mbar,.m-only,.inv-tog{display:none}
+@media screen and (max-width:1060px){
+  html,body{height:auto}
+  body{padding-bottom:calc(64px + env(safe-area-inset-bottom))}
+  .top{height:46px;padding:0 14px}
+  .mark{width:28px;height:28px;font-size:11px}
+  .brand-t b{font-size:14px}.brand-t span{display:none}
+  .app{display:block;height:auto}
   .side{display:none}
-  .main{overflow:visible}.list{overflow:visible;max-height:none}
-  .inv{border-left:0;border-top:1px solid var(--line)}
-  .top{flex-wrap:wrap;height:auto;padding:10px 14px}
-  .mobile-dept{display:inline-flex!important}
-}
-@media (max-width:640px){
-  .item{grid-template-columns:minmax(0,1fr) auto 34px}
+  .main{overflow:visible}
+  .toolbar{position:sticky;top:0;z-index:20;padding:10px 12px 8px;gap:8px;background:rgba(17,18,20,.97);backdrop-filter:blur(8px)}
+  .search input{height:44px;font-size:16px}
+  .kbd,#hint{display:none!important}
+  .row{flex-wrap:wrap;gap:8px}
+  .row .top-sp{display:none}
+  .mobile-dept{display:inline-flex!important;flex:1;min-width:0;height:34px}
+  #sort{height:34px;width:auto;flex:0 0 auto}
+  .seg{display:flex;order:3;flex:1 0 100%;overflow-x:auto;scrollbar-width:none}
+  .seg::-webkit-scrollbar{display:none}
+  .seg button{flex:1 0 auto;padding:6px 10px}
+  .chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -12px;padding:0 12px}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex-shrink:0;padding:5px 11px}
+  .list{overflow:visible;padding:4px 8px 16px}
+  .item{grid-template-columns:minmax(0,1fr) auto 38px;padding:11px 8px;gap:10px}
   .item .cd{display:none}
-  .seg{width:100%}.seg button{flex:1;padding:4px 4px}
-  #hint{display:none}
+  .item .nm{white-space:normal;line-height:1.3}
+  .add{width:36px;height:36px}
+  .grp{padding:14px 8px 4px}
+  /* invoice as its own screen */
+  .inv{display:none;border-left:0;position:fixed;left:0;right:0;top:46px;bottom:calc(64px + env(safe-area-inset-bottom));z-index:25;background:var(--bg2)}
+  body.m-inv .inv{display:flex}
+  body.m-inv .main{display:none}
+  .inv-h{padding:10px 14px}
+  .inv-tog{display:inline-flex}
+  .case{display:none;padding:8px 14px 12px}
+  body.m-case .case{display:grid}
+  .lines{padding:4px 8px 12px}
+  .days{padding:8px 10px}
+  .foot{padding:10px 14px 12px}
+  .grand b{font-size:22px}
+  .acts{margin-top:10px}
+  .acts .btn{height:38px}
+  .custom{padding:8px 14px}
+  .qty{height:34px}.qty button{width:34px}
+  .unit{height:34px}
+  .ln .x{width:34px;height:34px}
+  /* bottom bar */
+  .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:40;align-items:center;gap:12px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:var(--panel);border-top:1px solid var(--line2);box-shadow:0 -10px 30px rgba(0,0,0,.35)}
+  .mbar .info{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.2}
+  .mbar .info small{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mbar .info b{font-family:var(--mono);font-size:19px;font-weight:600}
+  .mbar .btn{height:42px;padding:0 16px;font-size:14px}
+  .mbar.bump{animation:bump .35s ease}
+  @keyframes bump{0%{background:var(--panel)}30%{background:#3a1a21}100%{background:var(--panel)}}
+  .toast{bottom:auto;top:54px;transform:translate(-50%,-10px)}
+  .toast.on{transform:translate(-50%,0)}
+}
+@media screen and (max-width:420px){
+  .mbar .btn{padding:0 12px}
 }
 
 /* Print */
@@ -199,7 +249,8 @@ textarea.inp{height:auto;min-height:34px;padding:7px 9px;resize:vertical}
 @media print{
   @page{margin:16mm 14mm}
   body{background:#fff;color:#111;font-size:11pt}
-  .top,.app,.scrim,.toast{display:none!important}
+  .top,.app,.scrim,.toast,.mbar{display:none!important}
+  body{padding:0!important}
   #print{display:block}
   .p-h{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #981e32;padding-bottom:10px;margin-bottom:14px}
   .p-h h1{font-size:17pt;font-weight:700;letter-spacing:-.01em}
@@ -295,6 +346,7 @@ textarea.inp{height:auto;min-height:34px;padding:7px 9px;resize:vertical}
     <div class="inv-h">
       <h2>Case invoice</h2><span class="cnt" id="lineCount">0</span>
       <div class="sp"></div>
+      <button class="btn ghost sm inv-tog" id="caseTog">Case details</button>
       <button class="btn ghost sm danger" id="newCaseBtn" title="Clear every day and start a new case">New case</button>
     </div>
     <div class="case">
@@ -325,12 +377,17 @@ textarea.inp{height:auto;min-height:34px;padding:7px 9px;resize:vertical}
       <div class="acts">
         <button class="btn" id="copyBtn"><svg class="i" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></svg>Copy</button>
         <button class="btn" id="csvBtn"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>CSV</button>
-        <button class="btn primary" id="printBtn"><svg class="i" viewBox="0 0 24 24"><path d="M7 9V4h10v5M7 17H5a1 1 0 0 1-1-1v-5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a1 1 0 0 1-1 1h-2"/><path d="M7 14h10v6H7z"/></svg>Print case</button>
+        <button class="btn" id="pdfBtn"><svg class="i" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M12 12v6M9 15l3 3 3-3"/></svg>PDF</button>
+        <button class="btn primary" id="printBtn"><svg class="i" viewBox="0 0 24 24"><path d="M7 9V4h10v5M7 17H5a1 1 0 0 1-1-1v-5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a1 1 0 0 1-1 1h-2"/><path d="M7 14h10v6H7z"/></svg>Print</button>
       </div>
     </div>
   </aside>
 </div>
 
+<div class="mbar" id="mbar">
+  <div class="info"><small id="mInfo">Day 1 &middot; 0 items</small><b id="mTotal">$0.00</b></div>
+  <button class="btn primary" id="mToggle">View invoice</button>
+</div>
 <div class="toast" id="toast"></div>
 <div id="print"></div>
 
@@ -385,7 +442,8 @@ const isCurrent = s => s.rank >= 2026;
 const yearLabel = d => { const m = String(d).match(/\d{4}/); return m ? m[0] : 'n.d.'; };
 
 /* ---------- view state ---------- */
-const view = {dept:'all', species:'All', cat:'all', q:'', sort:'rel', kb:0};
+const view = {dept:'all', species:'All', cat:'all', q:'', sort:'rel', kb:0, page:1};
+const PAGE = () => window.matchMedia('(max-width:1060px)').matches ? 25 : 50;
 
 /* ---------- sidebar ---------- */
 function renderSide(){
@@ -398,12 +456,12 @@ function renderSide(){
     `<p class="side-note">Older sheets are the newest versions available for those services. When a 2026 sheet lists the same billing code, only the 2026 price is shown.</p>`;
   $('#deptMobile').innerHTML = `<option value="all">All departments</option>` + SHEETS.map(s => `<option value="${esc(s.dept)}" ${view.dept===s.dept?'selected':''}>${esc(s.dept)} (${yearLabel(s.date)})</option>`).join('');
 }
-$('#side').addEventListener('click', e => { const b = e.target.closest('.dept'); if(!b) return; view.dept = b.dataset.dept; view.cat='all'; view.kb=0; renderSide(); renderList(); });
-$('#deptMobile').addEventListener('change', e => { view.dept = e.target.value; view.cat='all'; renderSide(); renderList(); });
+$('#side').addEventListener('click', e => { const b = e.target.closest('.dept'); if(!b) return; view.dept = b.dataset.dept; view.cat='all'; view.page=1; view.kb=0; renderSide(); renderList(); });
+$('#deptMobile').addEventListener('change', e => { view.dept = e.target.value; view.cat='all'; view.page=1; renderSide(); renderList(); window.scrollTo(0,0); });
 
 $('#species').innerHTML = SPECIES.map(s => `<button data-sp="${s}" class="${s===view.species?'on':''}">${s}</button>`).join('');
-$('#species').addEventListener('click', e => { const b = e.target.closest('button'); if(!b) return; view.species = b.dataset.sp; view.cat='all'; $$('#species button').forEach(x => x.classList.toggle('on', x===b)); renderSide(); renderList(); });
-$('#sort').addEventListener('change', e => { view.sort = e.target.value; renderList(); });
+$('#species').addEventListener('click', e => { const b = e.target.closest('button'); if(!b) return; view.species = b.dataset.sp; view.cat='all'; view.page=1; $$('#species button').forEach(x => x.classList.toggle('on', x===b)); renderSide(); renderList(); });
+$('#sort').addEventListener('change', e => { view.sort = e.target.value; view.page=1; renderList(); });
 
 /* ---------- list ---------- */
 let visible = [];
@@ -443,7 +501,7 @@ function renderCats(){
   $('#cats').innerHTML = `<button class="chip ${view.cat==='all'?'on':''}" data-cat="all">All<span class="n">${base.length}</span></button>` +
     keys.map(k => `<button class="chip ${view.cat===k?'on':''}" data-cat="${esc(k)}">${esc(k)}<span class="n">${cats[k]}</span></button>`).join('');
 }
-$('#cats').addEventListener('click', e => { const b = e.target.closest('.chip'); if(!b) return; view.cat = b.dataset.cat; view.kb=0; renderList(); });
+$('#cats').addEventListener('click', e => { const b = e.target.closest('.chip'); if(!b) return; view.cat = b.dataset.cat; view.page=1; view.kb=0; renderList(); });
 
 function renderList(){
   renderCats();
@@ -460,7 +518,7 @@ function renderList(){
   if(!rows.length){ $('#list').innerHTML = `<div class="empty"><b>No matches</b>Try a shorter search or another species. You can also add a custom line item.</div>`; return; }
   const grouped = !toks.length && view.sort==='rel';
   let html = '', last = null;
-  const LIMIT = 400;
+  const LIMIT = PAGE()*view.page;
   rows.slice(0, LIMIT).forEach((it, idx) => {
     const key = (view.dept==='all' ? it.d+' / ' : '') + it.g;
     if(grouped && key!==last){ html += `<div class="grp">${esc(key)}</div>`; last = key; }
@@ -473,14 +531,14 @@ function renderList(){
       <button class="add" title="Add to ${esc(dayName(targetDay()))}"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
     </div>`;
   });
-  if(rows.length > LIMIT) html += `<div class="empty" style="padding:24px">Showing the first ${LIMIT} of ${rows.length}. Narrow by department or search to see the rest.</div>`;
+  if(rows.length > LIMIT) html += `<div class="more"><span>${LIMIT} of ${rows.length.toLocaleString()}</span><button class="btn sm" data-more>Show ${Math.min(PAGE(), rows.length-LIMIT)} more</button></div><p class="side-note" style="text-align:center;margin:0 0 10px">Search or pick a department to narrow the list.</p>`;
   $('#list').innerHTML = html;
 }
-$('#list').addEventListener('click', e => { const it = e.target.closest('.item'); if(it) addItem(it.dataset.id); });
+$('#list').addEventListener('click', e => { if(e.target.closest('[data-more]')){ view.page++; renderList(); return; } const it = e.target.closest('.item'); if(it) addItem(it.dataset.id); });
 
 /* search */
 const q = $('#q');
-q.addEventListener('input', () => { view.q = q.value.trim(); view.kb = 0; view.cat='all'; $('#clr').style.display = view.q?'inline-flex':'none'; $('#kbd').style.display = view.q?'none':'block'; renderList(); $('#list').scrollTop = 0; });
+q.addEventListener('input', () => { view.q = q.value.trim(); view.kb = 0; view.cat='all'; view.page=1; $('#clr').style.display = view.q?'inline-flex':'none'; $('#kbd').style.display = view.q?'none':'block'; renderList(); $('#list').scrollTop = 0; });
 $('#clr').addEventListener('click', () => { q.value=''; q.dispatchEvent(new Event('input')); q.focus(); });
 q.addEventListener('keydown', e => {
   if(e.key==='ArrowDown'){ e.preventDefault(); view.kb = Math.min(visible.length-1, view.kb+1); renderList(); scrollKb(); }
@@ -530,7 +588,7 @@ function addItem(id){
   const ex = d.lines.find(l => l.ref===id && l.price==null);
   if(ex) ex.qty = +(ex.qty+1).toFixed(2);
   else d.lines.push({k:uid(), ref:id, qty:1, pick:'lo', price:null});
-  save(); renderInvoice(); renderList();
+  save(); renderInvoice(); renderList(); bump();
   toast(`Added to ${dayName(d)}: ${it.n}` + (it.lo==null ? '. No price on the sheet, enter one on the invoice.' : ''));
 }
 $('#customForm').addEventListener('submit', e => {
@@ -608,6 +666,7 @@ function renderInvoice(){
 }
 function renderTotals(){
   const t = totals();
+  renderMbar();
   if(isFull()) $('#dayRow').style.display = 'none';
   else { const d = targetDay(); $('#dayRow').style.display = 'flex'; $('#dayRowLbl').textContent = dayName(d)+' total'; $('#t_day').textContent = money(dayTotal(d)); }
   $('#t_sub').textContent = money(t.sub);
@@ -723,11 +782,140 @@ $('#printBtn').addEventListener('click', () => {
     <div class="p-tot">${C.days.length>1?C.days.map(d => `<div style="color:#555"><span>${dayName(d)}</span><span>${money(dayTotal(d))}</span></div>`).join(''):''}<div><span>Subtotal</span><span>${money(t.sub)}</span></div>${t.disc>0?`<div><span>Discount (${t.pct}%)</span><span>-${money(t.disc)}</span></div>`:''}<div class="gt"><span>Case total</span><span>${money(t.total)}</span></div>${t.ranged?`<div style="font-size:9pt;color:#555"><span>Estimate range</span><span>${money(t.lo)} - ${money(t.hi)}</span></div>`:''}</div>
     <div class="p-foot"><div>Clinician signature</div><div>Client acknowledgement</div></div>
     <div class="p-disc">Simulation invoice for the Diagnostic Challenge course. Prices from WSU VTH price sheets; final charges may differ.</div>`;
-  window.print();
+  let embedded = false; try{ embedded = window.self !== window.top; }catch(e){ embedded = true; }
+  if(embedded) toast('Printing may be blocked in this preview. Use PDF, or open the file in Safari or Chrome.');
+  try{ window.print(); }catch(e){ toast('Printing is not available here. Use PDF instead.'); }
 });
 
+
+/* ---------- PDF (no browser print needed) ---------- */
+const HW = [278, 278, 355, 556, 556, 889, 667, 191, 333, 333, 389, 584, 278, 333, 278, 278, 556, 556, 556, 556, 556, 556, 556, 556, 556, 556, 278, 278, 584, 584, 584, 556, 1015, 667, 667, 722, 722, 667, 611, 778, 722, 278, 500, 667, 556, 833, 722, 778, 667, 778, 722, 667, 611, 722, 667, 944, 667, 667, 611, 278, 278, 278, 469, 556, 333, 556, 556, 500, 556, 556, 278, 556, 556, 222, 222, 500, 222, 833, 556, 556, 556, 556, 333, 500, 278, 556, 500, 722, 500, 500, 500, 334, 260, 334, 584], BW = [278, 333, 474, 556, 556, 889, 722, 238, 333, 333, 389, 584, 278, 333, 278, 278, 556, 556, 556, 556, 556, 556, 556, 556, 556, 556, 333, 333, 584, 584, 584, 611, 975, 722, 722, 722, 722, 667, 611, 778, 722, 278, 556, 722, 611, 833, 722, 778, 667, 778, 722, 667, 611, 722, 667, 944, 667, 667, 611, 333, 278, 333, 584, 556, 333, 556, 611, 556, 611, 556, 333, 611, 611, 278, 278, 556, 278, 889, 611, 611, 611, 611, 389, 556, 333, 611, 556, 778, 556, 556, 500, 389, 280, 389, 584];
+const pdfTxt = s => String(s==null?'':s).replace(/[–—]/g,'-').replace(/[·•]/g,'-').replace(/×/g,'x').replace(/[‘’]/g,"'").replace(/[“”]/g,'"').replace(/[^\x20-\x7e]/g,'');
+const tw = (s, size, bold) => { const W = bold?BW:HW; let w = 0; for(const ch of pdfTxt(s)) w += W[ch.charCodeAt(0)-32] || 556; return w*size/1000; };
+function wrap(s, size, bold, max){
+  const words = pdfTxt(s).split(' '), out = []; let line = '';
+  words.forEach(w => { const t = line ? line+' '+w : w; if(tw(t,size,bold) <= max || !line) line = t; else { out.push(line); line = w; } });
+  if(line) out.push(line); return out;
+}
+function buildPDF(){
+  const t = totals(), pages = []; let ops = [], y = 0;
+  const W = 612, H = 792, L = 48, R = 564;
+  const esc = s => pdfTxt(s).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');
+  const text = (s, x, yy, size, bold, rgb, align) => {
+    if(align==='r') x -= tw(s,size,bold);
+    ops.push(`BT ${rgb||'0.07 0.07 0.07'} rg /${bold?'F2':'F1'} ${size} Tf ${x.toFixed(2)} ${yy.toFixed(2)} Td (${esc(s)}) Tj ET`);
+  };
+  const line = (x1, y1, x2, y2, w, rgb) => ops.push(`${rgb||'0.8 0.8 0.8'} RG ${w} w ${x1} ${y1.toFixed(2)} m ${x2} ${y2.toFixed(2)} l S`);
+  const rect = (x, yy, w, h, rgb) => ops.push(`${rgb} rg ${x} ${yy.toFixed(2)} ${w} ${h} re f`);
+  const COL = {code:L, item:L+62, qty:400, unit:482, tot:R};
+  const head = () => {
+    text('CODE', COL.code, y, 7, true, '0.45 0.45 0.45'); text('ITEM', COL.item, y, 7, true, '0.45 0.45 0.45');
+    text('QTY', COL.qty, y, 7, true, '0.45 0.45 0.45', 'r'); text('UNIT', COL.unit, y, 7, true, '0.45 0.45 0.45', 'r'); text('TOTAL', COL.tot, y, 7, true, '0.45 0.45 0.45', 'r');
+    y -= 6; line(L, y, R, y, 0.8, '0.55 0.55 0.55'); y -= 14;
+  };
+  const newPage = first => {
+    if(ops.length) pages.push(ops.join('\n'));
+    ops = []; y = H - 52;
+    if(!first){ text((C.f.case||'Diagnostic Challenge Invoice')+' (continued)', L, y, 9, true); y -= 22; head(); }
+  };
+  const need = h => { if(y - h < 70) newPage(false); };
+  newPage(true);
+  // header
+  text('Diagnostic Challenge Invoice', L, y, 18, true);
+  const dates = C.days.map(d => d.date).filter(Boolean);
+  text(C.days.length+' day'+(C.days.length>1?'s':''), R, y+4, 9, false, '0.3 0.3 0.3', 'r');
+  if(dates.length) text(dates[0]+(dates.length>1?' - '+dates[dates.length-1]:''), R, y-8, 9, false, '0.3 0.3 0.3', 'r');
+  y -= 15; text('Washington State University Veterinary Teaching Hospital', L, y, 9.5, false, '0.35 0.35 0.35');
+  y -= 10; line(L, y, R, y, 1.6, '0.596 0.118 0.196'); y -= 20;
+  [['CASE / PATIENT', C.f.case], ['TEAM / CLINICIAN', C.f.team], ['SIGNALMENT', C.f.sig]].forEach(([k, v], i) => {
+    const x = L + i*172; text(k, x, y, 7, true, '0.45 0.45 0.45'); wrap(v||'-', 10, false, 162).slice(0,2).forEach((s, j) => text(s, x, y-13-j*12, 10, false));
+  });
+  y -= 46; head();
+  C.days.forEach(d => {
+    need(40);
+    rect(L, y-5, R-L, 17, '0.945 0.945 0.945');
+    text((dayName(d)+(d.date?'  -  '+d.date:'')).toUpperCase(), L+4, y, 8, true, '0.25 0.25 0.25');
+    text(money(dayTotal(d)), COL.tot, y, 8.5, true, '0.25 0.25 0.25', 'r');
+    y -= 19;
+    if(!d.lines.length){ text('No items', COL.item, y, 9, false, '0.55 0.55 0.55'); y -= 16; }
+    d.lines.forEach(l => {
+      const {name, code, it} = lineInfo(l), p = linePrice(l);
+      const nm = wrap(name + ((it&&it.lo==null&&l.price==null)?' (price needed)':''), 9.5, false, COL.qty - 40 - COL.item);
+      need(nm.length*12 + 6);
+      text(code||'', COL.code, y, 8, false, '0.4 0.4 0.4');
+      nm.forEach((s, j) => text(s, COL.item, y - j*12, 9.5, false));
+      text(String(l.qty), COL.qty, y, 9.5, false, null, 'r');
+      text(money(p), COL.unit, y, 9.5, false, null, 'r');
+      text(money(p*l.qty), COL.tot, y, 9.5, false, null, 'r');
+      y -= nm.length*12 + 2; line(L, y+6, R, y+6, 0.4, '0.88 0.88 0.88'); y -= 8;
+    });
+  });
+  // totals
+  const rows = [];
+  if(C.days.length>1) C.days.forEach(d => rows.push([dayName(d), money(dayTotal(d)), '0.4 0.4 0.4']));
+  rows.push(['Subtotal', money(t.sub)]);
+  if(t.disc>0) rows.push([`Discount (${t.pct}%)`, '-'+money(t.disc)]);
+  need(rows.length*15 + 120);
+  y -= 8; const X = 360;
+  rows.forEach(([a, b, c]) => { text(a, X, y, 10, false, c); text(b, R, y, 10, false, c, 'r'); y -= 15; });
+  line(X, y+9, R, y+9, 1.4, '0.1 0.1 0.1'); y -= 8;
+  text('Case total', X, y, 13, true); text(money(t.total), R, y, 13, true, null, 'r'); y -= 15;
+  if(t.ranged){ text('Estimate range', X, y, 8.5, false, '0.4 0.4 0.4'); text(money(t.lo)+' - '+money(t.hi), R, y, 8.5, false, '0.4 0.4 0.4', 'r'); y -= 12; }
+  y -= 40; line(L, y, L+220, y, 0.7, '0.45 0.45 0.45'); line(R-220, y, R, y, 0.7, '0.45 0.45 0.45');
+  text('Clinician signature', L, y-12, 9, false, '0.3 0.3 0.3'); text('Client acknowledgement', R-220, y-12, 9, false, '0.3 0.3 0.3');
+  y -= 34; text('Simulation invoice for the Diagnostic Challenge course. Prices from WSU VTH price sheets; final charges may differ.', L, y, 7.5, false, '0.5 0.5 0.5');
+  pages.push(ops.join('\n'));
+  // assemble
+  const objs = [];
+  const add = s => { objs.push(s); return objs.length; };
+  add('<< /Type /Catalog /Pages 2 0 R >>');
+  add(null);
+  const f1 = add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>');
+  const f2 = add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>');
+  const kids = [];
+  pages.forEach((c, i) => {
+    c += `\nBT 0.55 0.55 0.55 rg /F1 7.5 Tf ${R - tw('Page '+(i+1)+' of '+pages.length,7.5)} 30 Td (Page ${i+1} of ${pages.length}) Tj ET`;
+    const s = add(`<< /Length ${c.length} >>\nstream\n${c}\nendstream`);
+    kids.push(add(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${W} ${H}] /Resources << /Font << /F1 ${f1} 0 R /F2 ${f2} 0 R >> >> /Contents ${s} 0 R >>`));
+  });
+  objs[1] = `<< /Type /Pages /Kids [${kids.map(k => k+' 0 R').join(' ')}] /Count ${kids.length} >>`;
+  let out = '%PDF-1.4\n', offs = [];
+  objs.forEach((o, i) => { offs.push(out.length); out += `${i+1} 0 obj\n${o}\nendobj\n`; });
+  const xref = out.length;
+  out += `xref\n0 ${objs.length+1}\n0000000000 65535 f \n` + offs.map(o => String(o).padStart(10,'0')+' 00000 n \n').join('');
+  out += `trailer\n<< /Size ${objs.length+1} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF`;
+  return new Blob([out], {type:'application/pdf'});
+}
+const fileBase = () => (C.f.case||'dc-case').replace(/[^\w\- ]+/g,'').trim().replace(/\s+/g,'-') || 'dc-case';
+$('#pdfBtn').addEventListener('click', async () => {
+  if(!hasLines()) return toast('Add items first');
+  const blob = buildPDF(), name = fileBase()+'-invoice.pdf';
+  const mobile = window.matchMedia('(max-width:1060px)').matches;
+  try{
+    const file = new File([blob], name, {type:'application/pdf'});
+    if(mobile && navigator.canShare && navigator.canShare({files:[file]})){ await navigator.share({files:[file], title:name}); return; }
+  }catch(e){ if(e && e.name==='AbortError') return; }
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+  toast('PDF saved: '+name);
+});
+
+/* mobile bar */
+function renderMbar(){
+  const t = totals(), d = targetDay();
+  const n = isFull() ? C.days.reduce((a,x) => a + x.lines.length, 0) : d.lines.length;
+  $('#mInfo').textContent = isFull() ? `Full case \u00b7 ${C.days.length} day${C.days.length>1?'s':''} \u00b7 ${n} item${n===1?'':'s'}` : `${dayName(d)}: ${money(dayTotal(d))} \u00b7 ${n} item${n===1?'':'s'} \u00b7 case total`;
+  $('#mTotal').textContent = money(t.total);
+  $('#mToggle').textContent = document.body.classList.contains('m-inv') ? 'Add items' : 'View invoice';
+}
+$('#mToggle').addEventListener('click', () => { document.body.classList.toggle('m-inv'); window.scrollTo(0,0); renderMbar(); });
+$('#caseTog').addEventListener('click', () => { document.body.classList.toggle('m-case'); $('#caseTog').textContent = document.body.classList.contains('m-case') ? 'Hide details' : 'Case details'; });
+function bump(){ const m = $('#mbar'); m.classList.remove('bump'); void m.offsetWidth; m.classList.add('bump'); }
+
 /* toast */
-let tt; function toast(m){ const el = $('#toast'); el.textContent = m; el.classList.add('on'); clearTimeout(tt); tt = setTimeout(() => el.classList.remove('on'), 2200); }
+let tt, mt; function toast(m){
+  if(window.matchMedia('(max-width:1060px)').matches){ const i = $('#mInfo'); i.textContent = m; i.style.color = 'var(--text)'; bump(); clearTimeout(mt); mt = setTimeout(() => { i.style.color = ''; renderMbar(); }, 1800); return; }
+  const el = $('#toast'); el.textContent = m; el.classList.add('on'); clearTimeout(tt); tt = setTimeout(() => el.classList.remove('on'), 2200); }
 
 /* init */
 renderSide(); renderInvoice(); renderList();
